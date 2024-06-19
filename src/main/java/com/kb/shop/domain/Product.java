@@ -1,9 +1,7 @@
 package com.kb.shop.domain;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
-import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
@@ -27,5 +25,8 @@ public class Product extends ProductBase {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Stock> stocks;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id", nullable = true)
+    private Promotion promotion;
 
 }

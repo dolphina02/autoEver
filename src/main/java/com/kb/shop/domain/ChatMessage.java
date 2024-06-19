@@ -1,6 +1,7 @@
 package com.kb.shop.domain;
 
 import lombok.Data;
+import lombok.Value;
 
 @Data
 public class ChatMessage {

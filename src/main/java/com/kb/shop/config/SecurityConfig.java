@@ -39,7 +39,8 @@ public class SecurityConfig {
                 // 세션 고정을 통해 인증 정보를 유지
                 .sessionManagement(sessionManagement ->
                         sessionManagement
-                                .sessionFixation().changeSessionId()  // 로그인 후에도 세션 유지
+                                .sessionFixation().changeSessionId()   // 로그인 후에도 세션 유지
+
                 )
                 // 해당 헤더를 통해 보안을 강화하여 전달할 수 있다.
 //                .headers(headers -> headers

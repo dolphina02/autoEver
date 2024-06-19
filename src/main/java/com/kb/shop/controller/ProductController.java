@@ -15,7 +15,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/")
+    @GetMapping("/") // localhost:8080/
     public String home(Model model) {
         model.addAttribute("products", productService.findAll());
         return "home"; // home.html 템플릿 반환
