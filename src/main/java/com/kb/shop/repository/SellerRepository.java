@@ -16,18 +16,12 @@ public class SellerRepository {
 
     public Seller selectSellerInfo(Long id) {
         String sql = "SELECT * FROM seller WHERE id = ?";
-//        return jdbcTemplate.query(sql, new Object[]{id}, (rs, rowNum) -> {
-//            Seller seller = new Seller();
-//            seller.setId(rs.getLong("id"));
-//            seller.setSellerName(rs.getString("sellerName"));
-//            seller.setSellerGrade(rs.getse("sellerGrade"));
-//            seller.setMargin(rs.getDouble("margin"));
-//            seller.setPolicy(rs.getString("sellerPolicy"));
-//            seller.setCategory(rs.getString("sellerCategory"));
-//            return seller;
-//        });
-
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, BeanPropertyRowMapper.newInstance(Seller.class));
+    }
+
+    public Seller selectSelectInfoBySellerName (String sellerName) {
+        String sql = "SELECT * FROM seller WHERE seller_name = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{sellerName}, BeanPropertyRowMapper.newInstance(Seller.class));
     }
 
     public void deleteSellerInfo(Long id) {

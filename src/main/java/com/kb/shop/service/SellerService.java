@@ -19,8 +19,10 @@ public class SellerService {
         sellerRepository.deleteSellerInfo(id);
     }
 
+
     public Seller setSellerInfo (Seller seller) {
         sellerRepository.setSellerInfo(seller);
-        return getSellerInfo(seller.getId());
+        //return getSellerInfo(seller.getId());
+        return sellerRepository.selectSelectInfoBySellerName(seller.getSellerName());
     }
 }
