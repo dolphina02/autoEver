@@ -20,6 +20,33 @@ public class UserController {
         return "register";
     }
 
+    @PutMapping("/change/{id}")
+    public String changePassword (@PathVariable Long id,@RequestParam String oldPassword,@RequestParam String newPassword) {
+        String returnMsg = userService.checkIdAndChangePassword(id, oldPassword, newPassword);
+        return returnMsg;
+    }
+
+    @GetMapping("/checkId")
+    @ResponseBody // 만일 해당 어노테이션이 없으면 returnValue.html 을 찾으려고 함
+    public String checkIdExist (@RequestParam Long id) {
+        if (userService.checkIdExist(id)) {
+            return "ID exist!";
+        }
+        else return "ID doesn't exist!";
+    }
+
+    //
+//    @GetMapping("/checkId")
+//    public String checkIdExist(@RequestParam("id") Long id, Model model) {
+//        boolean exists = userService.checkIdExist(id);
+//        if (exists) {
+//            model.addAttribute("message", "ID exists!");
+//        } else {
+//            model.addAttribute("message", "ID doesn't exist!");
+//        }
+//        return "result"; // 결과를 보여줄 템플릿 이름
+//    }
+
     @PostMapping("/register")
     public String register(User user, RedirectAttributes redirectAttributes) {
         User registeredUser = userService.registerUser(user);

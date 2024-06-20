@@ -31,7 +31,7 @@ public class SellerRepository {
     }
 
     public void deleteSellerInfo(Long id) {
-        String sql = "DELETE seller WHERE id = ?";
+        String sql = "DELETE FROM seller WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
 

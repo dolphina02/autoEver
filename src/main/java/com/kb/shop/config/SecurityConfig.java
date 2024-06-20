@@ -1,5 +1,4 @@
 package com.kb.shop.config;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +19,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         // 인가된 path를 지정해줌
                         authorizeRequests
-                                .requestMatchers("/", "/home", "/register", "/css/**", "/js/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/login", "/chat", "/cart/**", "/seller/**").permitAll()
+                                .requestMatchers("/", "/checkId", "/h2-console/**", "/home", "/register", "/css/**", "/js/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/login", "/chat", "/cart/**", "/seller/**", "/checkId").permitAll()
                                 .anyRequest().authenticated()
                 )
                 // 로그인을 통해 인증하는 내용
@@ -43,18 +42,9 @@ public class SecurityConfig {
 
                 )
                 // 해당 헤더를 통해 보안을 강화하여 전달할 수 있다.
-//                .headers(headers -> headers
-//                        .xssProtection(xss -> xss
-//                                .block(true))
-//                        .frameOptions(frameOptions -> frameOptions
-//                                .sameOrigin())
-//                        .httpStrictTransportSecurity(hsts -> hsts
-//                                .includeSubDomains(true)
-//                                .maxAgeInSeconds(31536000))
-//                )
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers("/cart/**", "/seller/**")  // CSRF 보호 비활성화 경로 설정
+                        .ignoringRequestMatchers("/cart/**", "/seller/**", "/checkId")  // CSRF 보호 비활성화 경로 설정
                 )
         ;
 

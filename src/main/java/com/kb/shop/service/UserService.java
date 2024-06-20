@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -20,6 +21,43 @@ public class UserService {
     public User registerUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    public String checkIdAndChangePassword(Long userId, String oldPassword, String newPassword) {
+        // user의 credential 정보가 맞는지 확인
+        if (checkPasswordByUserInfo(userId, oldPassword)) {
+            if (changePassword(userId, newPassword)) {
+                return "password has been changed successfully!";
+            }
+            else return "password not changed.";
+        }
+        else return "user is not exist.";
+    }
+
+    public Boolean changePassword(Long userId, String newPassword) {
+        User user = new User();
+        user.setId(userId);
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        return true;
+    }
+
+    public Boolean checkIdExist(Long userId) {
+       return userRepository.existsById(userId);
+    }
+
+    public Boolean checkPasswordByUserInfo(Long userId, String password) {
+        Optional<User> user = userRepository.findById(userId);
+
+        if (user.isEmpty()){
+            return false;
+        }
+        else {
+            if (user.get().getPassword().equals(password)) {
+                return true;
+            }
+            else return false;
+        }
     }
 
     public User findByUsername(String username) {
