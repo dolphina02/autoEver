@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/seller")
 public class SellerController {
 
     @Autowired
     private SellerService sellerService;
 
-    @GetMapping("/seller/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Seller> getSellerInfo(@PathVariable Long id) {
         Seller seller = new Seller();
         seller = sellerService.getSellerInfo(id);
@@ -29,13 +30,13 @@ public class SellerController {
         }
     }
 
-    @DeleteMapping("/seller/{id}")
+    @DeleteMapping("/{id}")
     public void deletePromotionInfo(@PathVariable Long id) {
         sellerService.deleteSellerInfo(id);
     }
 
-    @PostMapping("/seller")
-    public ResponseEntity<Seller> setSellerInfo(@RequestParam Seller seller) {
+    @PostMapping("/")
+    public ResponseEntity<Seller> setSellerInfo(@RequestBody Seller seller) {
         Seller newSeller = new Seller();
         newSeller = sellerService.setSellerInfo(seller);
         if (newSeller != null) {

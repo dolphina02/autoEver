@@ -20,7 +20,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         // 인가된 path를 지정해줌
                         authorizeRequests
-                                .requestMatchers("/", "/home", "/register", "/css/**", "/js/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/login", "/chat", "/cart/**").permitAll()
+                                .requestMatchers("/", "/home", "/register", "/css/**", "/js/**", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/login", "/chat", "/cart/**", "/seller/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 // 로그인을 통해 인증하는 내용
@@ -54,8 +54,9 @@ public class SecurityConfig {
 //                )
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers("/cart/**")  // CSRF 보호 비활성화 경로 설정
-                );
+                        .ignoringRequestMatchers("/cart/**", "/seller/**")  // CSRF 보호 비활성화 경로 설정
+                )
+        ;
 
         return http.build();
     }
