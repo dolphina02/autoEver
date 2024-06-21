@@ -46,6 +46,11 @@ public class UserService {
        return userRepository.existsById(userId);
     }
 
+    public Boolean checkUsernameExist(String username) {
+         User user = userRepository.findByUsername(username);
+         return user != null ? true:false;
+    }
+
     public Boolean checkPasswordByUserInfo(Long userId, String password) {
         Optional<User> user = userRepository.findById(userId);
 

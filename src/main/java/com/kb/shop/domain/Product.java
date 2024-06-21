@@ -25,8 +25,6 @@ public class Product extends ProductBase {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Stock> stocks;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "promotion_id", nullable = true)
-    private Promotion promotion;
+
 
 }

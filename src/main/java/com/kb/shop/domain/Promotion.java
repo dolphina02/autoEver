@@ -25,6 +25,4 @@ public class Promotion {
     private String affectRange; // 범위, Category, ProductCode
     private double discountRate; // 할인, 20%
 
-    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products;
 }

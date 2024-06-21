@@ -26,7 +26,7 @@ public class UserController {
         return returnMsg;
     }
 
-    @GetMapping("/checkId")
+    @GetMapping("/check/id")
     @ResponseBody // 만일 해당 어노테이션이 없으면 returnValue.html 을 찾으려고 함
     public String checkIdExist (@RequestParam Long id) {
         if (userService.checkIdExist(id)) {
@@ -35,8 +35,17 @@ public class UserController {
         else return "ID doesn't exist!";
     }
 
-    //
-//    @GetMapping("/checkId")
+    @GetMapping("/check/username")
+    @ResponseBody // 만일 해당 어노테이션이 없으면 returnValue.html 을 찾으려고 함
+    public String checkIdExist (@RequestParam String username) {
+        boolean exists = userService.checkUsernameExist(username);
+        return exists ? "Username : "+ username+" exists!" : "Username : " + username +" doesn't exist!";
+    }
+
+
+
+//
+//    @GetMapping("/check/Id")
 //    public String checkIdExist(@RequestParam("id") Long id, Model model) {
 //        boolean exists = userService.checkIdExist(id);
 //        if (exists) {
