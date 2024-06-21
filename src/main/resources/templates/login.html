@@ -83,7 +83,7 @@
 
       console.log("Checking ID:", userId); // 콘솔 로그 추가
       $.ajax({
-        url: '/checkId',
+        url: '/check/id',
         type: 'get',
         data: { id: userId },
         beforeSend: function(xhr) {
@@ -110,7 +110,7 @@
 
       console.log("Checking Username:", username); // 콘솔 로그 추가
       $.ajax({
-        url: '/checkUsername',
+        url: '/check/username',
         type: 'get',
         data: { username: username },
         beforeSend: function(xhr) {
